@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<style type="text/css">
+form#pago {
+	margin: auto;
+	background: Green;
+	color: white;
+	font-size: 22px;
+	padding: 50px;
+	width: auto;
+	border: solid 10px LightSteelBlue;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+form#pago fieldset {
+	border: none;
+}
+
+form#pago input {
+	font-size: 14px;
+	background: plum;
+	border: solid 1px Green;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	float: right;
+	margin-right: 15px;
+	width: 200px;
+}
+
+form#pago ol li {
+	line-height: 25px;
+	list-style: none;
+}
+
+form#pago [required] {
+	border: solid 1px red;
+}
+
+input:required {
+	outline: 1px solid red;
+}
+
+.mainTable {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.caption1 {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 24px;
+	color: blue;
+}
+
+.caption2 {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 24px;
+	color: red;
+}
+
+.heading {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+	color: black;
+	background-color: silver;
+	text-align: center;
+}
+
+.even {
+	font-family: Times New Roman, serif;
+	font-size: 18px;
+	color: black;
+	background-color: white;
+	text-indent: 20px;
+}
+
+.odd {
+	font-family: Times New Roman, serif;
+	font-size: 18px;
+	color: white;
+	background-color: black;
+	text-indent: 20px;
+}
+
+.buttons {
+	margin: auto;
+	color: black;
+	font-size: 2px;
+	padding: 10px;
+	width: auto;
+	border: solid 2px LightSteelBlue;
+	border-radius: 2px;
+	text-indent: 15px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+}
+</style>
+
+
+</body>
+
+<h:form id="pago">
+
+
+	<h:dataTable var="_cliente" value="#{clienteBean.getClientes}"
+		border="1" rendered="#{not empty clienteBean.getClientes}"
+		styleClass="mainTable" captionClass="caption2" headerClass="heading"
+		columnClasses="even,odd,even,odd" cellspacing="2" cellpadding="3">
+
+		<f:facet name="header">
+			<h:outputText value="Listado Clientes con sus Cuentas" />
+		</f:facet>
+		<h:column>
+			<f:facet name="header">Cedula</f:facet>
+        #{_cliente.idcedula}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Nombre</f:facet>
+        #{_cliente.nombre}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Apellido</f:facet>
+        #{_cliente.apellido}
+    </h:column>
+		<h:column>
+			<f:facet name="header">E-mail</f:facet>
+        #{_cliente.correo}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Password</f:facet>
+        #{_cliente.password}
+    </h:column>
+
+
+		<h:column>
+			<f:facet name="header">Cuentas</f:facet>
+
+			<h:dataTable var="cuenta" value="#{_cliente.cuenta}">
+				<h:column>
+						Codigo cuenta:  #{cuenta.idcuenta}
+						Tipo cuenta:    #{cuenta.tipo}
+						Saldo Cuenta:   #{cuenta.saldo} $
+				</h:column>
+
+			</h:dataTable>
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Acciones Clientes</f:facet>
+			<h:commandButton styleClass="buttons"
+				action="#{clienteBean.editar(_cliente,_cliente.cuenta)}"
+				value="Editar" />
+		</h:column>
+
+		<h:column>
+			<f:facet name="header">Acciones Cuentas</f:facet>
+			<h:commandButton styleClass="buttons"
+				action="#{clienteBean.editar(_cliente,_cliente.cuenta)}"
+				value="Editar" />
+		</h:column>
+
+		<f:facet name="footer">
+		</f:facet>
+	</h:dataTable>
+	
+	<br />
+
+	<h:dataTable var="_usuario" value="#{usuarioBean.geUsers}"
+		rendered="#{not empty usuarioBean.geUsers}" border="1"
+		styleClass="mainTable" captionClass="caption2" headerClass="heading"
+		columnClasses="even,odd,even,odd" cellspacing="2" cellpadding="3">
+
+		<f:facet name="header">
+			<h:outputText value="Listado Usuarios" />
+		</f:facet>
+
+		<h:column>
+			<f:facet name="header">Codigo</f:facet>
+        #{_usuario.idusuario}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Nombre</f:facet>
+        #{_usuario.nombre}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Apellido</f:facet>
+        #{_usuario.apellido}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Email</f:facet>
+        #{_usuario.correo}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Password</f:facet>
+        #{_usuario.passsword}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Rol</f:facet>
+        #{_usuario.rol}
+    </h:column>
+
+		<h:column>
+			<f:facet name="header">Acciones</f:facet>
+			<h:commandButton styleClass="buttons"
+				action="#{usuarioBean.borrar(_usuario.idusuario)}" value="Borrar" />
+			<h:commandButton styleClass="buttons"
+				action="#{usuarioBean.editar(_usuario)}" value="Editar" />
+		</h:column>
+
+		<f:facet name="footer">
+			<h:commandButton action="create-persona" value="Crear persona" />
+		</f:facet>
+	</h:dataTable>
+
+</h:form>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+
+<body>
+
+	<style type="text/css">
+form#pago {
+	margin: auto;
+	background: Green;
+	color: white;
+	font-size: 18px;
+	padding: 50px;
+	width: 450px;
+	border: solid 10px LightSteelBlue;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+form#pago fieldset {
+	border: none;
+}
+
+form#pago input {
+	font-size: 14px;
+	background: yellow;
+	border: solid 1px Green;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	float: right;
+	margin-right: 15px;
+	width: 200px;
+}
+
+form#pago ol li {
+	line-height: 25px;
+	list-style: none;
+}
+
+form#pago [required] {
+	border: solid 1px red;
+}
+
+input:required {
+	outline: 1px solid red;
+}
+</style>
+
+
+</body>
+
+<h:form id="pago">
+	<p:messages id="msgs" />
+	<fieldset>
+		<legend>DATOS DE CLIENTE</legend>
+		<ol>
+			<li><label for="nombre">Correo cliente</label> <h:inputText
+					value="#{loginBean.cliente.correo}" id="txtname" /> <h:message
+					for="txtname" /></li>
+
+			<li><label for="nombre">Password</label> <h:inputSecret
+					value="#{loginBean.cliente.password}" id="txtpass" /> <h:message
+					for="txtpass" /></li>
+
+		</ol>
+	</fieldset>
+	<fieldset>
+		<h:commandButton action="insertclientecuenta"
+			value="Crear Cliente-Cuenta" />
+		<ol>
+
+
+		</ol>
+	</fieldset>
+	-------------------------------------------------
+	<fieldset>
+		<h:commandButton action="#{loginBean.guardarAuditoriaSuccessful()}"
+			value="Login Cliente" icon="pi pi-check" />
+	</fieldset>
+</h:form>
+
+</html>

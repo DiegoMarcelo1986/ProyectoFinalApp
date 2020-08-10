@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+			<title>Validar rango de fechas</title>
+		</f:facet>
+	</h:head>
+	<h:body>
+
+		<h:form>
+			<h:panelGrid id="grid" columns="1" cellpadding="1">
+				<p:messages id="messages" showDetail="true" autoUpdate="true"
+					closable="true" />
+
+				<p:outputLabel for="fechaInicio" value="Fecha Inicio" />
+				<p:calendar id="fechaInicio" value="#{validarFechas.fechaInicio}"
+					showOn="button" />
+
+				<p:outputLabel for="fechaFin" value="Fecha Inicio" />
+				<p:calendar id="fechaFin" value="#{validarFechas.fechaFinal}"
+					showOn="button" />
+
+				<p:commandButton value="Validar"
+					actionListener="#{validarFechas.getFechaActual()}" />
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+
+</f:view>
+</html>

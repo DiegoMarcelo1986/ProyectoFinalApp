@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<fieldset>
+		<legend>SESSION INICIADA CON CLIENTE</legend>
+		#{loginBean.nombreCLiente}
+	</fieldset>
+
+</h:head>
+
+<body>
+
+	<style type="text/css">
+form#pago {
+	margin: auto;
+	background: Green;
+	color: white;
+	font-size: 20px;
+	padding: 60px;
+	width: auto;
+	border: solid 10px LightSteelBlue;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+}
+
+form#pago fieldset {
+	border: none;
+}
+
+form#pago input {
+	font-size: 14px;
+	background: yellow;
+	border: solid 1px Green;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	float: right;
+	margin-right: 15px;
+	width: 200px;
+}
+
+form#pago ol li {
+	line-height: 25px;
+	list-style: none;
+}
+
+form#pago [required] {
+	border: solid 1px red;
+}
+
+input:required {
+	outline: 1px solid red;
+}
+
+.mainTable {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.caption1 {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 24px;
+	color: blue;
+}
+
+.caption2 {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 24px;
+	color: red;
+}
+
+.heading {
+	font-family: sans-serif;
+	font-weight: bold;
+	font-size: 20px;
+	color: black;
+	background-color: silver;
+	text-align: center;
+}
+
+.even {
+	font-family: Times New Roman, serif;
+	font-size: 18px;
+	color: black;
+	background-color: white;
+	text-indent: 20px;
+}
+
+.odd {
+	font-family: Times New Roman, serif;
+	font-size: 18px;
+	color: white;
+	background-color: black;
+	text-indent: 20px;
+}
+
+.buttons {
+	margin: auto;
+	color: black;
+	font-size: 2px;
+	padding: 10px;
+	width: auto;
+	border: solid 2px LightSteelBlue;
+	border-radius: 2px;
+	text-indent: 15px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+}
+</style>
+
+</body>
+
+<h:form id="pago">
+	<fieldset>
+		<legend>RESUMEN DE SU CUENTA DE AHORROS</legend>
+
+		<h:dataTable border="1" var="_resumencuenta"
+			value="#{loginBean.resumenCuenta}"
+			rendered="#{not empty loginBean.resumenCuenta}"
+			styleClass="mainTable" captionClass="caption2" headerClass="heading"
+			columnClasses="even,odd,even,odd" cellspacing="2" cellpadding="3">
+
+			<f:facet name="header">
+				<h:outputText value="RESUMEN DE SU CUENTA DE AHORROS" />
+			</f:facet>
+
+			<h:column>
+				<f:facet name="header">Numero Cuenta</f:facet>
+        #{_resumencuenta.numeroCuenta}
+    </h:column>
+			<h:column>
+				<f:facet name="header">Propietario</f:facet>
+        #{_resumencuenta.propetario}
+    </h:column>
+			<h:column>
+				<f:facet name="header">Fecha Ultima Transacción</f:facet>
+        #{_resumencuenta.fechaUltimaTrans}
+    </h:column>
+
+			<h:column>
+				<f:facet name="header">Saldo</f:facet>
+        #{_resumencuenta.saldo}
+    </h:column>
+		</h:dataTable>
+	</fieldset>
+	-------------------------------------------------
+	<legend>Consulta Movimientos entre Fechas</legend>
+
+	<p:panelGrid columns="2" border="12" style="margin:0 auto;"
+		cellpadding="9" cellspacing="4" headerClass="list-header"
+		rowClasses="list-row-even, list-row-odd" styleClass="list-background"
+		title="#{bundle.Checkout}">
+
+		<f:facet name="header">
+			<h:outputText value="Consulta Movimientos Fechas"
+				style="background-color: #FFE4C4" />
+		</f:facet>
+
+		<p:outputLabel for="fechaInicio" value="Fecha Desde" />
+		<p:calendar id="fechaInicio" pattern="MM/dd/yyyy"
+			value="#{loginBean.fechaDesde}" showOn="button" />
+
+		<p:outputLabel for="fechaFin" value="Fecha Hasta" />
+		<p:calendar id="fechaFin" pattern="MM/dd/yyyy"
+			value="#{loginBean.fechaHasta}" showOn="button" />
+
+		<f:facet name="footer">
+			<h:commandButton styleClass="buttons" value="Consultar"
+				actionListener="#{loginBean.loadGetMovimientosFechas()}" />
+		</f:facet>
+	</p:panelGrid>
+	
+	<br />
+
+	<h:dataTable border="6" var="movimiento"
+		value="#{loginBean.getMovimientosFechas}"
+		rendered="#{not empty loginBean.getMovimientosFechas}"
+		styleClass="mainTable" captionClass="caption2" headerClass="heading"
+		columnClasses="even,odd,even,odd" cellspacing="2" cellpadding="3">
+
+		<f:facet name="header">
+			<h:outputText value="MOVIMIENTOS FECHAS" />
+		</f:facet>
+
+		<h:column>
+			<f:facet name="header">Codigo</f:facet>
+        #{movimiento.id}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Fecha</f:facet>
+        #{movimiento.fecha}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Monto</f:facet>
+        #{movimiento.monto}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Tipo</f:facet>
+        #{movimiento.tipo}
+    </h:column>
+	</h:dataTable>
+	
+	-------------------------------------------------
+	<fieldset>
+		<h:commandButton styleClass="buttons" action="#{loginBean.getAuditoriaa()}"
+			value="Accesos a mi cuenta" />
+	</fieldset>
+
+	<legend>Consulta de Accesos a mi cuenta</legend>
+
+	<h:dataTable border="6" var="auditoria" value="#{loginBean.auditorias}"
+		rendered="#{not empty loginBean.auditorias}" styleClass="mainTable"
+		captionClass="caption2" headerClass="heading"
+		columnClasses="even,odd,even,odd" cellspacing="2" cellpadding="3">
+
+		<f:facet name="header">
+			<h:outputText value="ACCESOS A MI CUENTA" />
+		</f:facet>
+
+		<h:column>
+			<f:facet name="header">Descripción</f:facet>
+        #{auditoria.descripcion}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Fechas de Accesos</f:facet>
+        #{auditoria.fecha}
+    </h:column>
+	</h:dataTable>
+</h:form>
+
+</html>

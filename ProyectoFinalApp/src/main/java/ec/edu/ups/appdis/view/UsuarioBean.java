@@ -15,7 +15,7 @@ import ec.edu.ups.appdis.model.Cuenta;
 import ec.edu.ups.appdis.model.Rol;
 import ec.edu.ups.appdis.model.Usuario;
 import ec.edu.ups.appdis.on.UsuarioON;
-import testjpa.utils.*;
+import testjpa.utils.*;   
 
 @ManagedBean
 public class UsuarioBean implements Serializable {

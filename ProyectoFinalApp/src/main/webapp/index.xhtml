@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8"/>
+  <title>Banco Mundial UPS</title>
+  <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Open+Sans:600'/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+
+<body>
+  <div class="login-wrap">
+	<div class="login-html" align="center">
+	
+		<input id="tab-3" type="button" name="tab" class="sign-in" /><label for="tab-3"  class="tab">BANCO MUNDIAL UPS</label>
+		<br></br>
+		<br></br>
+		<br></br>
+		<input id="tab-1" type="radio" name="tab" class="sign-in" /><label for="tab-1" class="tab">CLIENTES</label>
+		<input id="tab-2" type="radio" name="tab" class="sign-up"/><label for="tab-2" class="tab">USUARIOS</label>
+		<div class="login-form">
+			<div class="sign-in-htm">
+			
+				<br></br>
+<!-- 				<div class="group"> -->
+<!-- 					<label for="user" class="label"> Escoja una de las Opciones para Clientes</label> -->
+<!-- 				</div> -->
+				
+				<div class="group">
+					<label for="pass" class="label"></label>
+				</div>
+				
+				
+				<div class="group">
+<!-- 					<input type="submit" class="button" action="logincliente" value="Ingresar"/> -->
+<!-- 					<input type="submit" class="button" action="" value="Ingresar"/> -->
+						<input type="submit" class="button" value="Ingresar a Sistema" onclick="location.href='logincliente.xhtml';" />
+				</div>
+				
+				<div class="group">
+<!-- 					<input type="submit" class="button" value="Registrar"/> -->
+						<input type="submit" class="button" value="Registrar Cliente" onclick="location.href='insertclientecuenta.xhtml';" />
+				</div>
+				<div class="hr"></div>
+				
+			</div>
+			<div class="sign-up-htm">
+				<br></br>
+<!-- 				<div class="group"> -->
+<!-- 					<label for="user" class="label"> Escoja una de las Opciones para Usuarios</label> -->
+<!-- 				</div> -->
+				<div class="group">
+					<label for="pass" class="label"></label>
+				</div>
+				
+				<div class="group">
+					<input type="submit" class="button" value="Ingresar a Sistema" onclick="location.href='login_usuario.xhtml';" />
+				</div>
+				<div class="group">
+						<input type="submit" class="button" value="Registrar Usuario" onclick="location.href='insertusuario.xhtml';" />
+				</div>
+				<div class="hr"></div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+  
+  
+</body>
+</html>

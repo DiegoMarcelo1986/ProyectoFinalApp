@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+</h:head>
+<body>
+
+	<style type="text/css">
+form#pago {
+	margin: auto;
+	background: Green;
+	color: white;
+	font-size: 18px;
+	padding: 50px;
+	width: 450px;
+	border: solid 10px LightSteelBlue;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+form#pago fieldset {
+	border: none;
+}
+
+form#pago input {
+	font-size: 20px;
+	background: yellow;
+	border: solid 1px Green;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	float: right;
+	margin-right: 15px;
+	width: 200px;
+}
+
+form#pago ol li {
+	line-height: 25px;
+	list-style: none;
+}
+
+form#pago [required] {
+	border: solid 1px red;
+}
+
+input:required {
+	outline: 1px solid red;
+}
+</style>
+
+
+</body>
+
+<h:form id="pago">
+	<p:growl id="growl" showDetail="true" life="2800" />
+	<p:messages id="msgs" />
+	<fieldset>
+		<legend>MOVIMIENTOS VENTANILLA</legend>
+		<ol>
+			<li><label for="nombre">Id movimi</label> <h:inputText
+					value="#{movimientoBean.newMovimiento.id}" id="txtid" /> <h:message
+					for="txtid" /></li>
+			<br />
+			<li><label for="nombre">Cuenta</label> <h:inputText
+					value="#{movimientoBean.newCuenta.idcuenta}" id="txtcuenta">
+				</h:inputText> <h:message for="txtcuenta" /></li>
+			<br />
+			<h:commandButton action="#{movimientoBean.cuentacliente()}"
+				update="growl" id="btn" value="Verificar Cliente"
+				style="width:100%;" icon="pi pi-save"
+				styleClass="ui-priority-primary">
+				<f:ajax execute="txtcuenta" render="out1 out2" />
+			</h:commandButton>
+
+			<br />
+			<br />
+
+			<p:panelGrid columns="3" border="12" style="margin:0 auto;"
+				cellpadding="9" cellspacing="4" headerClass="list-header"
+				rowClasses="list-row-even, list-row-odd"
+				styleClass="list-background" title="#{bundle.Checkout}">
+
+				<f:facet name="header">
+					<h:outputText value="Cliente - Cuenta"
+						style="background-color: #FFE4C4" />
+				</f:facet>
+
+				<label for="nombre">Cliente</label>
+				<h:outputText id="out1" value="#{movimientoBean.nombreCliente}" />
+				<h:message for="out1" />
+
+				<label for="nombre">Saldo Actual Cuenta</label>
+				<h:outputText id="out2" value="#{movimientoBean.saldoCuenta}" />
+				<h:message for="out2" />
+
+			</p:panelGrid>
+
+			<br />
+			<br />
+
+			<li><p:outputLabel value="Cantidad" /> <h:inputText
+					value="#{movimientoBean.newMovimiento.monto}" id="txtname" /> <h:message
+					for="txtname" /></li>
+			<br />
+
+			<li><p:outputLabel value="Tipo		" /> <p:selectOneMenu
+					value="#{movimientoBean.newMovimiento.tipo}">
+					<f:selectItem itemLabel="-----Seleccione Tipo----" itemValue="" />
+					<f:selectItem itemValue="Deposito" itemLabel="Deposito" />
+					<f:selectItem itemValue="Retiro" itemLabel="Retiro" />
+				</p:selectOneMenu></li>
+
+		</ol>
+
+		<br />
+
+		<p:commandButton value="Guardar" style="width:100%;"
+			onclick="PF('dlg').show();" immediate="true" />
+
+		<p:dialog id="dlg2" header="Confirmar Transacción"
+			showEffect="explode" hideEffect="explode" widgetVar="dlg"
+			modal="true" resizable="false" minWidth="200">
+			<h:outputText value="¿Desea Confirmar Transacción?" />
+			<p:commandButton value="Cancelar" onclick="dlg2.hide();"
+				styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+			<p:commandButton action="#{movimientoBean.cuentacliente()}" onclick="dlg2.hide();"
+				update="growl" id="ajax" value="Confirmar" icon="ui-icon-check"
+				styleClass="ui-confirmdialog-yes">
+				<f:actionListener binding="#{movimientoBean.transaccion()}">
+					<f:ajax execute="btn" render="out1 out2" />
+				</f:actionListener>
+			</p:commandButton>
+		</p:dialog>
+	</fieldset>
+
+</h:form>
+
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<style type="text/css">
+form#pago {
+	margin: auto;
+	background: Green;
+	color: white;
+	font-size: 18px;
+	padding: 50px;
+	width: 450px;
+	border: solid 10px LightSteelBlue;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+form#pago fieldset {
+	border: none;
+}
+
+form#pago input {
+	font-size: 14px;
+	background: yellow;
+	border: solid 1px Green;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	float: right;
+	margin-right: 15px;
+	width: 200px;
+}
+
+form#pago ol li {
+	line-height: 25px;
+	list-style: none;
+}
+
+form#pago [required] {
+	border: solid 1px red;
+}
+
+input:required {
+	outline: 1px solid red;
+}
+</style>
+
+
+</body>
+
+<h:form id="pago">
+	<fieldset>
+		<legend>DATOS DE USUARIO</legend>
+		<ol>
+			<li><label for="nombre">Nombre</label> <h:inputText
+					value="#{usuarioBean.newUsuario.nombre}" id="txtname" /> <h:message
+					for="txtname" /></li>
+
+			<li><label for="nombre">Apellido</label> <h:inputText
+					value="#{usuarioBean.newUsuario.apellido}" id="txtapellido" /> <h:message
+					for="txtapellido" /></li>
+
+			<li><label for="email">Email</label> <h:inputText
+					value="#{usuarioBean.newUsuario.correo}" id="txtemail" /> <h:message
+					for="txtemail" /></li>
+
+			<li><label for="password">Password</label> <h:inputSecret
+					required="true" requiredMessage=" 	Password is required"
+					value="#{usuarioBean.newUsuario.passsword}" id="txtpass" /> <h:message
+					for="txtpass" /></li>
+
+			<br />
+
+			<li><p:outputLabel value="Seleccione un rol	" /> <p:selectOneMenu
+					value="#{usuarioBean.newUsuario.rol}">
+					<f:selectItem itemLabel="-----Seleccione Tipo----" itemValue="" />
+					<f:selectItem itemValue="Administrador" itemLabel="Administrador" />
+					<f:selectItem itemValue="Cajero" itemLabel="Cajero" />
+					<f:selectItem itemValue="Jefe de crédito"
+						itemLabel="Jefe de crédito" />
+				</p:selectOneMenu></li>
+
+		</ol>
+	</fieldset>
+
+	<!-- 
+	
+	<fieldset>
+		<legend>Ingrese ROL</legend>
+		<ol>
+
+			<li><h:outputLabel value="Descrip ROL" /> <h:selectOneMenu
+					id="rol" value="#{usuarioBean.newUsuario.rol}">
+					<f:selectItem itemLabel="" itemValue="" />
+					<f:selectItems value="#{rolConverter.itemsAvailableSelectMany}" />
+					<h:message for="rol" showDetail="true" />
+					<f:ajax execute="rol" render="pseleccionado" />
+					<hr />
+					<h:outputLabel value="Rol Selecionado: " />
+
+
+				</h:selectOneMenu></li>
+
+		</ol>
+	</fieldset>
+	
+	-->
+	
+	-------------------------------------------------
+	<fieldset>
+		<h:commandButton action="#{usuarioBean.guardar()}" value="Guardar" />
+	</fieldset>
+</h:form>
+
+</html>

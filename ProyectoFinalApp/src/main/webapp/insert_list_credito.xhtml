@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+
+	<style type="text/css">
+form#pago {
+	margin: auto;
+	background: Green;
+	color: white;
+	font-size: 18px;
+	padding: 50px;
+	width: 450px;
+	border: solid 10px LightSteelBlue;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+}
+
+form#pago fieldset {
+	border: none;
+}
+
+form#pago input {
+	font-size: 14px;
+	background: yellow;
+	border: solid 1px Green;
+	border-radius: 3px;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	float: right;
+	margin-right: 15px;
+	width: 200px;
+}
+
+form#pago ol li {
+	line-height: 25px;
+	list-style: none;
+}
+
+form#pago [required] {
+	border: solid 1px red;
+}
+
+input:required {
+	outline: 1px solid red;
+}
+</style>
+
+
+</body>
+
+<h:form id="pago">
+	<p:growl showDetail="true" life="2800" />
+	<p:messages id="msgs" />
+	<fieldset>
+		<legend>DATOS DE CREDITO</legend>
+		<ol>
+
+			<li><label for="idcuenta">Numero de Cuenta</label> <h:inputText
+					value="#{creditoBean.idCuenta}" id="txtidcuenta" /> <h:message
+					for="txtidcuenta" /></li>
+
+			<li><label for="valor">Valor Credito</label> <h:inputText
+					value="#{creditoBean.newCredito.monto}" id="txtvalor" /> <h:message
+					for="txtvalor" /></li>
+
+			<li><label for="nombre">Numero de Meses</label> <h:inputText
+					value="#{creditoBean.newCredito.numMeses}" id="txtapellido" /> <h:message
+					for="txtapellido" /></li>
+
+			<li><label for="email">Primera Fecha</label> <h:inputText
+					value="#{creditoBean.newCredito.priFecha}" id="txtemail" /> <h:message
+					for="txtemail" /></li>
+
+		</ol>
+	</fieldset>
+	<fieldset>
+		<h:commandButton
+			action="#{creditoBean.validarCuenta(creditoBean.idCuenta)}"
+			value="Guardar" />
+	</fieldset>
+	
+		-------------------------------------------------
+	<fieldset>
+		<ol>
+			<li><label for="pagos">Codigo de Pagos</label> <h:inputText
+					value="#{creditoBean.idCredito}" id="txtpa" /> <h:message
+					for="txtpa" /></li>
+			<h:commandButton styleClass="buttons"
+				action="#{creditoBean.getPaagos()}"
+				value="Tabla de pagos de credito" />
+		</ol>
+	</fieldset>
+
+	<legend>Tabla de amortización de credito</legend>
+
+	<h:dataTable border="6" var="pago" value="#{creditoBean.getPagos}"
+		rendered="#{not empty creditoBean.getPagos}" styleClass="mainTable"
+		captionClass="caption2" headerClass="heading"
+		columnClasses="even,odd,even,odd" cellspacing="2" cellpadding="3">
+
+		<f:facet name="header">
+			<h:outputText value="TABLA DE PAGOS" />
+		</f:facet>
+
+		<h:column>
+			<f:facet name="header">Codigo</f:facet>
+        #{pago.codigo}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Fechas de pago</f:facet>
+        #{pago.fechaPago}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Numero cuota</f:facet>
+        #{pago.numCuota}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Valor a Pagar</f:facet>
+        #{pago.valor}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Estado</f:facet>
+        #{pago.estado}
+    </h:column>
+		<h:column>
+			<f:facet name="header">Cancelado</f:facet>
+        #{pago.cancelado}
+    </h:column>
+	</h:dataTable>
+
+	<h:commandButton styleClass="buttons"
+		action="#{creditoBean.updatePagos()}" value="Actilizar Pagos" />
+</h:form>
+
+</html>

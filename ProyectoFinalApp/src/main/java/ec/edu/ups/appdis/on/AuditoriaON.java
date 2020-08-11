@@ -103,7 +103,7 @@ public class AuditoriaON {
 		getclienteCorreo = aDAO.getClienteLoginCorreo(correo);
 		getclientePass = aDAO.getClienteLoginPass(pass);
 		guardarAuditoriaSuccessful();
-		//enviarCorreoAccesoCuenta();
+		enviarCorreoAccesoCuenta();
 		if (getclienteCorreo.isEmpty())
 			throw new Exception("Correo del cliente ¡No existe!");
 		if (getclientePass.isEmpty())

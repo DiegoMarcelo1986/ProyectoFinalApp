@@ -82,7 +82,7 @@ public class CreditoON {
 			int numMeses = c.getNumMeses();
 
 			double respuesta = valorr / numMeses;
-			DecimalFormat df = new DecimalFormat("#.00");
+			DecimalFormat df = new DecimalFormat("#,000");
 
 			int cont = 0;
 			System.out.println("Inseqqqqqqqqq " + (df.format(respuesta)));

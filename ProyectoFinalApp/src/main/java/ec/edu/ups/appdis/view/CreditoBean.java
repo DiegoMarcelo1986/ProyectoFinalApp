@@ -86,7 +86,7 @@ public class CreditoBean {
 
 	}
 
-	public void validarCuenta(int idCuenta) {
+	public void validarCuenta() {
 		try {
 			con.validarCuenta(idCuenta);
 			saveCredito();

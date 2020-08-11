@@ -35,10 +35,9 @@ public class EnviarCorreoElectronico {
 
 	// for example, smtp.mailgun.org
 	private static final String SMTP_SERVER = "smtp.gmail.com";
-	private static final String USERNAME = "byrontejedor1996@gmail.com";
-	private static final String PASSWORD = "Matapayazos31";
-	private static final String EMAIL_FROM = "mcmichaelrapromantico1996@gmail.com";
-	//private static final String EMAIL_TO = "mcmichaelrapromantico1996@gmail.com";
+	private static final String USERNAME = "parradiego396@gmail.com";
+	private static final String PASSWORD = "JamesyJhuly2019";
+	private static final String EMAIL_FROM = "parradiego396@gmail.com";
 	private static final String EMAIL_TO_CC = "";
 
 	final static String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";

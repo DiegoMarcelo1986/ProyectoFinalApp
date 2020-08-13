@@ -84,5 +84,8 @@ public class CuentaON {
 		return c;
 
 	}
+	
+	public Cuenta buscarCuentaPorCorreo(String correo) {
+		return cdao.buscarCuentaPorCorreo(correo);
+	}
 }
-

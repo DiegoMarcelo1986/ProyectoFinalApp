@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import ec.edu.ups.appdis.model.Credito;
+import ec.edu.ups.appdis.model.Cuenta;
 import ec.edu.ups.appdis.model.Pago;
 import ec.edu.ups.appdis.on.AuditoriaON;
 import ec.edu.ups.appdis.on.ClienteON;
@@ -171,6 +172,32 @@ public class LoginServiceRest {
 	@Produces("application/json")
 	public List<Pago> getPagosVencidos(@QueryParam("numeroCredito") int numeroCredito) {
 		return con.getPagosVencidos(numeroCredito, "Vencido");
+	}
+	
+	@GET
+	@Path("/getcuentaxcorreo")
+	@Produces("application/json")
+	public Response getCuentaPorCorreo (@QueryParam("correo") String correo) {
+		int numeroCuenta; 	
+		
+		Response.ResponseBuilder builder = null;
+		Map<String, String> data = new HashMap<>();
+
+		try {
+			Cuenta cuenta = cueon.buscarCuentaPorCorreo(correo);
+			numeroCuenta = cuenta.getIdcuenta();
+			data.put("code", "1");
+			data.put("idcuenta", numeroCuenta+"");
+			builder = Response.status(Response.Status.OK).entity(data);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+			data.put("code", "99");
+			data.put("message", e.getMessage());
+			builder = Response.status(Response.Status.BAD_REQUEST).entity(data);
+		}
+
+		return builder.build();
 	}
 
 }

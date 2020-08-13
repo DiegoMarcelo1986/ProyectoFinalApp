@@ -81,4 +81,12 @@ public class CuentaDAO {
 		return cli;
 	}
 	
+	public Cuenta buscarCuentaPorCorreo(String correo) {
+		String jpql = "SELECT c FROM Cuenta c INNER JOIN c.cliente cli where cli.correo = :correo";
+		Query query = em.createQuery(jpql, Cuenta.class);
+		query.setParameter("correo", correo);
+		Cuenta cuenta = (Cuenta) query.getSingleResult();
+		return cuenta;
+	}
+	
 }
